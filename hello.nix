@@ -1,16 +1,15 @@
 {
   stdenv,
   fetchurl,
-  version,
-  sha256,
+  versionInfo
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "hello";
-  inherit version;
+  inherit (versionInfo) version;
 
   src = fetchurl {
     url = "mirror://gnu/hello/hello-${finalAttrs.version}.tar.gz";
-    inherit sha256;
+    inherit (versionInfo) sha256;
   };
 })

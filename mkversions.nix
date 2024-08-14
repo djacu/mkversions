@@ -4,6 +4,6 @@
 
 lib.recurseIntoAttrs (
   builtins.mapAttrs (
-    version: pkgArgs: callPackage package (pkgArgs // { inherit (pkgArgs) version; })
+    version: versionInfo: callPackage package { inherit versionInfo; }
   ) versions
 )
