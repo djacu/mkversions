@@ -2,8 +2,14 @@
 
 { package, versions }:
 
+let
+  mkVersionName = version: lib.concatStringsSep "_" (lib.splitVersion version);
+in
 lib.recurseIntoAttrs (
-  builtins.mapAttrs (
-    version: versionInfo: callPackage package { inherit versionInfo; }
+  lib.mapAttrs' (
+    version: info:
+    lib.nameValuePair
+    (info.version or (mkVersionName version))
+    (callPackage package { versionInfo = info // { inherit version; }; })
   ) versions
 )
