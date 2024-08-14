@@ -6,7 +6,7 @@ let
 
   # Example that overrides stdenv.
   mkVersions' = mkVersions.override {
-    inherit (pkgs.lib.makeScope pkgs.newScope (_: { stdenv = pkgs.stdenv; })) callPackage;
+    inherit (pkgs.lib.makeScope pkgs.newScope (_: { stdenv = pkgs.clang11Stdenv; })) callPackage;
   };
 in
 
