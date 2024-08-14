@@ -1,12 +1,7 @@
 { lib, callPackage }:
-{
-  package,
-  versions,
-  mkPackage ? callPackage package,
-}@args:
+{ package, versions }@args:
 lib.recurseIntoAttrs (
-  lib.mapAttrs' (version: pkgArgs: {
-    name = version;
-    value = mkPackage (pkgArgs // { inherit version; });
-  }) versions
+  builtins.mapAttrs (
+    version: pkgArgs: callPackage package (pkgArgs // { inherit (pkgArgs) version; })
+  ) versions
 )
