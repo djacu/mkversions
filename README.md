@@ -74,6 +74,7 @@ stdenv.mkDerivation {
 ### versions.nix
 
 ```nix
+{
   "2.12.1" = {
     hash = "sha256-jZkUKv2SV28wsM18tCqNxoCZmLxdYH2Idh9RLibH2yA=";
     version = "hello_2_12_1";
