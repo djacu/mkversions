@@ -4,7 +4,7 @@ let
   pkgs = import nixpkgs { };
 
   # you can use this...
-  mkVersions = pkgs.callPackage ./mkversions.nix { };
+  mkVersions = pkgs.callPackage ./mkVersions.nix { };
 
   # or, for instance, override things in it
   mkVersions' = mkVersions.override {
