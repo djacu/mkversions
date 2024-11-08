@@ -10,9 +10,12 @@ function SHOULD be used. This function takes two attributes:
 `package` and `versions`:
 
 - `package` MUST be a path or function compatible with `callPackage`.
-- `versions` MUST be a path to a JSON or Nix file,
-  attribute set, or expression evaluating to an attribute set, mapping
-  versions to _version attribute sets_ defining options specific to each version.
+- `versions` MUST be a path to a JSON or Nix file, attribute set,
+  or expression evaluating to an attribute set, mapping version names to 
+  _version attribute sets_ defining options specific to each version.
+  These version names SHOULD be the canonical ones (i.e. hello-2.12.1
+  would have `2.12.1` as the version name, _not_ `v2.12.1`, `2_12_1`,
+  or something else).
 
 Note that `versions` SHOULD be either a Nix or JSON file and SHOULD NOT
 be defined inline to the file in which mkVersions is used.
@@ -21,16 +24,21 @@ Each version attribute set MAY have the special key `version`.
 All other keys are user-defined.
 
 `mkVersions` MUST return an attribute set mapping _normalized_ version names
-to another attribute set containing the key `version` (set to the key in the
-`versions` attribute set).
+to the result of callPackage with the key `versionInfo` set to the _version
+info attribute set_.
 
 The _normalized_ version name is either the value of the key "version" in the
 version attribute set, or the result of joining lib.splitVersion
 with underscores.
 
+The _version info attribute set_ is another attribute set containing the key `version`,
+which is set to the canonical version. All other keys are merged from the version
+attribute set.
+
 ## Example
 
-Enough words, how does it look?
+OK, that's more than enough words and we aren't even doing the RFC process right now,
+how does it look?
 
 ### default.nix
 
