@@ -121,4 +121,4 @@ recurseIntoAttrs {
 }
 ```
 
-Which can then be build with `nix-build -A hello_2_12_1` or `nix-build -A 2_12`.
+Which can then be built with `nix-build -A hello_2_12_1` or `nix-build -A 2_12`.
